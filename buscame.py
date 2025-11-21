@@ -1,3 +1,29 @@
+"""
+=========================================================
+                PRESENTACIÓN DEL PROYECTO
+=========================================================
+
+Nombre del estudiante: Hilario Jimenez Victoriano
+Matrícula: 22760839
+Profesor: Guillermo Alejandro Chávez Sánchez
+Materia: Programación Lógica
+Fecha: Noviembre 2025
+
+Nombre del proyecto:
+"Analizador de conceptos de computación con Streamlit"
+
+Descripción:
+Este programa permite buscar conceptos clave relacionados
+con el tema de la computación y analizar textos para detectar
+palabras asociadas. Utiliza Streamlit para generar una interfaz
+interactiva, Pandas para organizar los datos y Altair para
+construir gráficos que muestran la importancia de cada concepto.
+El analizador identifica coincidencias con las palabras definidas
+y presenta resultados visuales claros y fáciles de interpretar.
+
+=========================================================
+"""
+
 import streamlit as st
 import pandas as pd
 import altair as alt
@@ -8,13 +34,13 @@ st.set_page_config(page_title="Computación 💻", layout="centered", page_icon=
 
 st.title("💻 Conceptos Clave de la Computación")
 
-# --- Datos: palabra, descripción, importancia e imagen ---
+# --- Datos: palabra abreviada, descripción, importancia e imagen ---
 data = {
     "Palabra": [
-        "Programación", "Algoritmo", "Inteligencia Artificial", "Base de Datos",
-        "Redes", "Ciberseguridad", "Hardware", "Software", "Computación en la Nube",
-        "Machine Learning", "Blockchain", "Sistemas Operativos", "Big Data",
-        "Realidad Virtual", "Computación Cuántica"
+        "Programación", "Algoritmo", "IA", "BD",
+        "Redes", "Ciberseguridad", "Hardware", "Software", "Nube",
+        "ML", "Blockchain", "SO", "Big Data",
+        "RV", "CC"
     ],
     "Importancia": [95, 90, 98, 88, 85, 92, 80, 84, 89, 97, 91, 83, 86, 82, 99],
     "Descripción": [
@@ -37,19 +63,19 @@ data = {
     "Imagen": [
         "https://cdn-icons-png.flaticon.com/512/2721/2721270.png",  # Programación
         "https://cdn-icons-png.flaticon.com/512/2206/2206368.png",  # Algoritmo
-        "https://cdn-icons-png.flaticon.com/512/4712/4712107.png",  # Inteligencia Artificial
-        "https://cdn-icons-png.flaticon.com/512/1055/1055646.png",  # Base de Datos
+        "https://cdn-icons-png.flaticon.com/512/4712/4712107.png",  # IA
+        "https://cdn-icons-png.flaticon.com/512/1055/1055646.png",  # BD
         "https://cdn-icons-png.flaticon.com/512/3208/3208676.png",  # Redes
         "https://cdn-icons-png.flaticon.com/512/3135/3135715.png",  # Ciberseguridad
         "https://cdn-icons-png.flaticon.com/512/2103/2103832.png",  # Hardware
         "https://cdn-icons-png.flaticon.com/512/3662/3662857.png",  # Software
         "https://cdn-icons-png.flaticon.com/512/1048/1048953.png",  # Nube
-        "https://cdn-icons-png.flaticon.com/512/4712/4712108.png",  # Machine Learning
+        "https://cdn-icons-png.flaticon.com/512/4712/4712108.png",  # ML
         "https://cdn-icons-png.flaticon.com/512/2910/2910768.png",  # Blockchain
         "https://cdn-icons-png.flaticon.com/512/2306/2306154.png",  # SO
         "https://cdn-icons-png.flaticon.com/512/3514/3514341.png",  # Big Data
-        "https://cdn-icons-png.flaticon.com/512/4261/4261174.png",  # VR
-        "https://cdn-icons-png.flaticon.com/512/4712/4712109.png"   # Computación Cuántica
+        "https://cdn-icons-png.flaticon.com/512/4261/4261174.png",  # RV
+        "https://cdn-icons-png.flaticon.com/512/4712/4712109.png"   # CC
     ]
 }
 
@@ -90,9 +116,9 @@ if busqueda:
 else:
     st.info("Escribe algo para comenzar la búsqueda. 👆")
 
-# --- NUEVA SECCIÓN: Análisis de texto ---
+# --- Análisis de texto ---
 st.markdown("---")
-st.subheader("🧠 Análisis de texto: ¿Cuántos conceptos aparecen en tu escrito?")
+st.subheader("Análisis de texto: ¿Cuántos conceptos aparecen en tu escrito?")
 
 texto_usuario = st.text_area("Escribe o pega aquí un texto relacionado con computación:", height=200)
 
@@ -101,7 +127,6 @@ if st.button("Analizar texto"):
         texto_limpio = texto_usuario.lower()
         coincidencias = []
         for palabra in df["Palabra"]:
-            # Normalizamos (quitamos acentos y comparamos en minúsculas)
             palabra_simple = re.sub(r"[^a-zA-ZáéíóúüñÁÉÍÓÚÜÑ ]", "", palabra).lower()
             if re.search(r"\b" + palabra_simple + r"\b", texto_limpio):
                 coincidencias.append(palabra)
@@ -133,4 +158,5 @@ if st.button("Analizar texto"):
 # --- Pie de página ---
 st.markdown("---")
 st.caption("Aplicación desarrollada en Streamlit — Tema: Computación 💻")
+
 

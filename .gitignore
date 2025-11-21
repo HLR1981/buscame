@@ -1,0 +1,8 @@
+echo __pycache__/ > .gitignore
+echo *.pyc >> .gitignore
+echo .vscode/ >> .gitignore
+echo Thumbs.db >> .gitignore
+echo Desktop.ini >> .gitignore
+echo *.log >> .gitignore
+echo *.tmp >> .gitignore
+
